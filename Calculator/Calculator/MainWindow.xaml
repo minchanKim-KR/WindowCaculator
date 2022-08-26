@@ -5,143 +5,150 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Calculator" MinHeight="550" MinWidth="300" Width="400" Height="650" Background="WhiteSmoke">
-    
-    <DockPanel VerticalAlignment="Stretch">
-        <Grid Height="45" DockPanel.Dock="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Menu>
-                <MenuItem Header="Menu" Height="45" Width="56" >
-                    <MenuItem Header="표준" IsCheckable="False"/>
-                    <Separator/>
-                    <MenuItem Header="환율" IsCheckable="False"/>
-                </MenuItem>
-            </Menu>
-            <Label Name="Type" Grid.Column="1" FontWeight="Bold" 
-                   HorizontalContentAlignment="Center"
-                   VerticalContentAlignment="Center"
-                   FontSize="20">표준</Label>
-            <Button Name="DisposeTopRight" Grid.Column="2" FontSize="25" 
-                    Background="WhiteSmoke" BorderThickness="0">⬈</Button>
-            <Button Name="Record" Grid.Column="8" FontSize="25" 
-                    Background="WhiteSmoke" BorderThickness="0" Click="PageOnRecord">⟲</Button>
-        </Grid>
-        <Grid Height="100" DockPanel.Dock="Top">
-            <Label Name="txtExp" FontSize="16"
-                     HorizontalContentAlignment="Right" Margin="15"
-                     BorderThickness="0" Background="WhiteSmoke"></Label>
-            <Label Name="txtResult" Height="50"
-                     FontWeight="Bold" FontSize="36" VerticalAlignment="Bottom"
-                     HorizontalContentAlignment="Right"
-                     VerticalContentAlignment="Bottom" Margin="10,10,15,10"
-                     BorderThickness="0" Background="WhiteSmoke"
-                   >0</Label>
-        </Grid>
-        <Grid Height="50" Background="LightGray" DockPanel.Dock="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button Name="btnMC" Grid.Column="0" FontSize="14"
+        Title="Calculator" MinHeight="650" MinWidth="400" Width="400" Height="650" MaxWidth="400" MaxHeight="650" Background="WhiteSmoke">
+
+    <Grid>
+        <DockPanel VerticalAlignment="Stretch">
+            <Grid Height="45" DockPanel.Dock="Top" Background="WhiteSmoke">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Menu>
+                    <MenuItem Header="Menu" Height="45" Width="56" Background="WhiteSmoke" BorderThickness="0">
+                        <MenuItem Header="표준" IsCheckable="False" Click="ChangeToStandard" />
+                        <Separator/>
+                        <MenuItem Header="환율" IsCheckable="False" Click="ChangeToExchangeRate"/>
+                    </MenuItem>
+                </Menu>
+                <Label Name="Type" Grid.Column="1" FontWeight="Bold" 
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       FontSize="20">표준</Label>
+                <Button Name="Record" Grid.Column="8" FontSize="25" 
+                        Background="WhiteSmoke" BorderThickness="0" Click="PageOnRecord">⟲</Button>
+            </Grid>
+            <Canvas>
+                <Grid Visibility="Hidden" Name="exrate">
+                    <Frame Source="/ExchangeRate.xaml"/>
+                </Grid>
+                <DockPanel Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Left" Width="390" Height="570" Name="std">
+                    <Grid Height="100" DockPanel.Dock="Top">
+                        <Label Name="txtExp" FontSize="16"
+                         HorizontalContentAlignment="Right" Margin="15"
+                         BorderThickness="0" Background="WhiteSmoke"></Label>
+                        <Label Name="txtResult" Height="50"
+                         FontWeight="Bold" FontSize="36" VerticalAlignment="Bottom"
+                         HorizontalContentAlignment="Right"
+                         VerticalContentAlignment="Bottom" Margin="10,10,15,10"
+                         BorderThickness="0" Background="WhiteSmoke"
+                       >0</Label>
+                    </Grid>
+                    <Grid Height="50" Background="LightGray" DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="btnMC" Grid.Column="0" FontSize="14"
                     BorderThickness="0" FontWeight="Bold" Background="WhiteSmoke"
                     IsEnabled="false" Click="MemoryClear">MC</Button>
-            <Button Name="btnMR" Grid.Column="1" FontSize="14"
+                        <Button Name="btnMR" Grid.Column="1" FontSize="14"
                     BorderThickness="0" FontWeight="Bold" Background="WhiteSmoke"
                     IsEnabled="false" Click="MemoryRead">MR</Button>
-            <Button Name="btnMPlus" Grid.Column="2" FontSize="14"
+                        <Button Name="btnMPlus" Grid.Column="2" FontSize="14"
                     BorderThickness="0" FontWeight="Bold" Background="WhiteSmoke"
                     IsEnabled="true" Click="MemoryPlus">M+</Button>
-            <Button Name="btnMMinus" Grid.Column="3" FontSize="14"
+                        <Button Name="btnMMinus" Grid.Column="3" FontSize="14"
                     BorderThickness="0" FontWeight="Bold" Background="WhiteSmoke"
                     IsEnabled="true" Click="MemoryMinus">M-</Button>
-            <Button Name="btnMS" Grid.Column="4" FontSize="14"
+                        <Button Name="btnMS" Grid.Column="4" FontSize="14"
                     BorderThickness="0" FontWeight="Bold" Background="WhiteSmoke"
                     IsEnabled="true" Click="MemorySave">MS</Button>
-            <Button Name="btnMRec" Grid.Column="5" FontSize="14"
+                        <Button Name="btnMRec" Grid.Column="5" FontSize="14"
                     BorderThickness="0" FontWeight="Bold" Background="WhiteSmoke"
                     IsEnabled="False" Click="MemoryList">M🢓</Button>
-        </Grid>
-        <Grid MinHeight="360" Background="LightGray">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+                    </Grid>
+                    <Grid MinHeight="360" Background="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="Percent">%</Button>
-            <Button Grid.Row="0" Grid.Column="1" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="ClearEntry">CE</Button>
-            <Button Grid.Row="0" Grid.Column="2" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="Clear">C</Button>
-            <Button Grid.Row="0" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="KeyDel_Input">⌫</Button>
+                        <Button Grid.Row="0" Grid.Column="0" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="Percent">%</Button>
+                        <Button Grid.Row="0" Grid.Column="1" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="ClearEntry">CE</Button>
+                        <Button Grid.Row="0" Grid.Column="2" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="Clear">C</Button>
+                        <Button Grid.Row="0" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="KeyDel_Input">⌫</Button>
 
-            <Button Grid.Row="1" Grid.Column="0" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="OneOutOfX">⅟𝑥</Button>
-            <Button Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="Square">𝑥²</Button>
-            <Button Grid.Row="1" Grid.Column="2" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="SquareRoot">√𝑥</Button>
-            <Button Grid.Row="1" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="Calc_Div">÷</Button>
+                        <Button Grid.Row="1" Grid.Column="0" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="OneOutOfX">⅟𝑥</Button>
+                        <Button Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="Square">𝑥²</Button>
+                        <Button Grid.Row="1" Grid.Column="2" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="SquareRoot">√𝑥</Button>
+                        <Button Grid.Row="1" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="Calc_Div">÷</Button>
 
-            <Button Grid.Row="2" Grid.Column="0" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key7_Input">7</Button>
-            <Button Grid.Row="2" Grid.Column="1" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key8_Input">8</Button>
-            <Button Grid.Row="2" Grid.Column="2" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key9_Input">9</Button>
-            <Button Grid.Row="2" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="Calc_Mul">X</Button>
+                        <Button Grid.Row="2" Grid.Column="0" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key7_Input">7</Button>
+                        <Button Grid.Row="2" Grid.Column="1" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key8_Input">8</Button>
+                        <Button Grid.Row="2" Grid.Column="2" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key9_Input">9</Button>
+                        <Button Grid.Row="2" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="Calc_Mul">X</Button>
 
-            <Button Grid.Row="3" Grid.Column="0" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key4_Input">4</Button>
-            <Button Grid.Row="3" Grid.Column="1" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key5_Input">5</Button>
-            <Button Grid.Row="3" Grid.Column="2" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key6_Input">6</Button>
-            <Button Grid.Row="3" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="Calc_Minus">－</Button>
+                        <Button Grid.Row="3" Grid.Column="0" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key4_Input">4</Button>
+                        <Button Grid.Row="3" Grid.Column="1" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key5_Input">5</Button>
+                        <Button Grid.Row="3" Grid.Column="2" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key6_Input">6</Button>
+                        <Button Grid.Row="3" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="Calc_Minus">－</Button>
 
-            <Button Grid.Row="4" Grid.Column="0" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key1_Input">1</Button>
-            <Button Grid.Row="4" Grid.Column="1" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key2_Input">2</Button>
-            <Button Grid.Row="4" Grid.Column="2" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key3_Input">3</Button>
-            <Button Grid.Row="4" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
-                    FontSize="18" Margin="2,1,1,1" Click="Calc_Plus">+</Button>
+                        <Button Grid.Row="4" Grid.Column="0" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key1_Input">1</Button>
+                        <Button Grid.Row="4" Grid.Column="1" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key2_Input">2</Button>
+                        <Button Grid.Row="4" Grid.Column="2" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,1" FontWeight="Bold" Click="Key3_Input">3</Button>
+                        <Button Grid.Row="4" Grid.Column="3" BorderThickness="0" Background="#FFECECEC"
+                        FontSize="18" Margin="2,1,1,1" Click="Calc_Plus">+</Button>
 
-            <Button Grid.Row="5" Grid.Column="0" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,2" Click="ChangeMark">+/-</Button>
-            <Button Grid.Row="5" Grid.Column="1" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,2" FontWeight="Bold" Click="Key0_Input">0</Button>
-            <Button Grid.Row="5" Grid.Column="2" BorderThickness="0" Background="GhostWhite"
-                    FontSize="18" Margin="2,1,1,2" FontWeight="Bold" Click="KeyDot_Input">.</Button>
-            <Button Grid.Row="5" Grid.Column="3" BorderThickness="0" Background="#FF96C4FF"
-                    FontSize="18" Margin="2,1,1,2" Click="ReturnResult">=</Button>
-        </Grid>
-    </DockPanel>
+                        <Button Grid.Row="5" Grid.Column="0" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,2" Click="ChangeMark">+/-</Button>
+                        <Button Grid.Row="5" Grid.Column="1" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,2" FontWeight="Bold" Click="Key0_Input">0</Button>
+                        <Button Grid.Row="5" Grid.Column="2" BorderThickness="0" Background="GhostWhite"
+                        FontSize="18" Margin="2,1,1,2" FontWeight="Bold" Click="KeyDot_Input">.</Button>
+                        <Button Grid.Row="5" Grid.Column="3" BorderThickness="0" Background="#FF96C4FF"
+                        FontSize="18" Margin="2,1,1,2" Click="ReturnResult">=</Button>
+                    </Grid>
+                </DockPanel>
+            </Canvas>
+        </DockPanel>
+    </Grid>
 </Window>

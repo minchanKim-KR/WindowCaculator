@@ -1,0 +1,180 @@
+﻿<Page x:Class="Calculator.ExchangeRate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Calculator"
+      mc:Ignorable="d" 
+      d:DesignHeight="450"
+      Title="ExchangeRate" 
+      MinHeight="550" 
+      MinWidth="300" 
+      Width="400" 
+      Height="650" 
+      Background="WhiteSmoke">
+
+    <DockPanel 
+        VerticalAlignment="Top" 
+        Visibility="Visible" 
+        Background="WhiteSmoke">
+        <Grid Height="70" 
+              DockPanel.Dock="Top">
+            <Label Name="curUnitLB1"
+                   FontSize="20" 
+                   VerticalAlignment="Center">t</Label>
+            <TextBlock Name="Item1"
+                       HorizontalAlignment="Stretch" 
+                       VerticalAlignment="Center" 
+                       FontSize="24" 
+                       Text="0" 
+                       Margin="85,0,0,0" 
+                       MouseDown="MouseDownItem1"></TextBlock>
+            <ComboBox Margin="0,120,230,0">
+                <Label>test1</Label>
+            </ComboBox>
+        </Grid>
+        <Grid Height="30" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Name ="cbx1" Margin="0,0,250,0" Grid.ColumnSpan="2" SelectionChanged="cbx1SelectedItemChanged"/>
+        </Grid>
+        <Grid Height="70" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Name="curUnitLB2" FontSize="20" VerticalAlignment="Center" Grid.ColumnSpan="4">t</Label>
+            <TextBlock Name="Item2" 
+                       VerticalAlignment="Center" 
+                       FontSize="24" 
+                       Text="0" 
+                       Margin="85,0,0,0" 
+                       MouseDown="MouseDownItem2" Grid.ColumnSpan="4"/>
+            <ComboBox Margin="0,120,230,-50" Grid.ColumnSpan="4">
+                <Label>test1</Label>
+            </ComboBox>
+        </Grid>
+        <Grid Height="30" DockPanel.Dock="Top">
+            <ComboBox Name="cbx2" Margin="0,0,250,0" SelectionChanged="cbx2SelectedItemChanged"></ComboBox>
+        </Grid>
+        <Grid Height="75" DockPanel.Dock="Top">
+            <Label Name ="exchangeRateLB" VerticalContentAlignment="Center" Margin="0,0,0,37">test1</Label>
+            <Label Name ="updateTimeLB" VerticalContentAlignment="Center" Margin="0,38,0,0">test2</Label>
+        </Grid>
+        <Grid Height="30" DockPanel.Dock="Top">
+            <Button Margin="0,5,250,0" Content="환율 업데이트" Click="UpdateButton" FontWeight="Normal"></Button>
+        </Grid>
+        <Grid Height="255" 
+              Width="375" 
+              HorizontalAlignment="Left" 
+              Margin="5,5,5,5" 
+              Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" 
+                  Grid.Column="1" 
+                  Margin="1,1,1,1">
+                <Button Name="CE"
+                        BorderThickness="0" 
+                        Background="WhiteSmoke" Click="Clear">CE</Button>
+            </Grid>
+            <Grid Grid.Row="0" 
+                  Grid.Column="2" 
+                  Margin="1,1,1,1">
+                <Button Name="Erase"
+                        BorderThickness="0" 
+                        Background="WhiteSmoke" Click="EraseNum">⌫</Button>
+            </Grid>
+            <Grid Grid.Row="1" 
+                  Grid.Column="0" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key7_Input">7</Button>
+            </Grid>
+            <Grid Grid.Row="1" 
+                  Grid.Column="1" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key8_Input">8</Button>
+            </Grid>
+            <Grid Grid.Row="1" 
+                  Grid.Column="2" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key9_Input">9</Button>
+            </Grid>
+            <Grid Grid.Row="2" 
+                  Grid.Column="0" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key4_Input">4</Button>
+            </Grid>
+            <Grid Grid.Row="2" 
+                  Grid.Column="1" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key5_Input">5</Button>
+            </Grid>
+            <Grid Grid.Row="2" 
+                  Grid.Column="2" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key6_Input">6</Button>
+            </Grid>
+            <Grid Grid.Row="3" 
+                  Grid.Column="0" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key1_Input">1</Button>
+            </Grid>
+            <Grid Grid.Row="3" 
+                  Grid.Column="1" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key2_Input">2</Button>
+            </Grid>
+            <Grid Grid.Row="3" 
+                  Grid.Column="2" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key3_Input">3</Button>
+            </Grid>
+            <Grid Grid.Row="4" 
+                  Grid.Column="1" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" 
+                        Click="Key0_Input">0</Button>
+            </Grid>
+            <Grid Grid.Row="4" 
+                  Grid.Column="2" 
+                  Margin="1,1,1,1">
+                <Button BorderThickness="0" 
+                        Background="GhostWhite" Click="KeyDot_Input">.</Button>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Page>

@@ -1643,5 +1643,21 @@ namespace WpfApp1
             memory.clear += new EventHandler(isMemoryClear);
             memory.ShowDialog();
         }
+
+        private void ChangeToExchangeRate(object sender, RoutedEventArgs e)
+        {
+            exrate.Visibility = Visibility.Visible;
+            std.Visibility = Visibility.Hidden;
+            Record.Visibility = Visibility.Hidden;
+            Type.Content = "환율";
+        }
+
+        private void ChangeToStandard(object sender, RoutedEventArgs e)
+        {
+            std.Visibility = Visibility.Visible;
+            exrate.Visibility = Visibility.Hidden;
+            Record.Visibility = Visibility.Visible;
+            Type.Content = "표준";
+        }
     }
 }
